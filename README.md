@@ -1,5 +1,5 @@
 # My Boxen
 
-Cloned from: [boxen-web](https://github.com/boxen/boxen-web)
+Cloned from: [our-boxen](https://github.com/boxen/our-boxen)
 
 
