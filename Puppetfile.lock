@@ -84,6 +84,11 @@ GITHUBTARBALL
     xquartz (1.2.1)
 
 GITHUBTARBALL
+  remote: phinze/puppet-brewcask
+  specs:
+    brewcask (0.0.4)
+
+GITHUBTARBALL
   remote: puppetlabs/puppetlabs-inifile
   specs:
     inifile (1.1.1)
@@ -100,6 +105,7 @@ GITHUBTARBALL
 
 DEPENDENCIES
   boxen (= 3.7.0)
+  brewcask (= 0.0.4)
   dnsmasq (= 2.0.0)
   foreman (= 1.2.0)
   gcc (= 2.2.0)
@@ -119,3 +125,4 @@ DEPENDENCIES
   stdlib (= 4.2.1)
   sudo (= 1.0.0)
   xquartz (= 1.2.1)
+

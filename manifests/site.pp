@@ -57,6 +57,7 @@ node default {
   include git
   include hub
   include nginx
+  include brewcask
 
   # Disabled for now because of issues with FileVault and Yosemite (hang on reboot)
   # fail if FDE is not enabled
@@ -81,8 +82,27 @@ node default {
     [
       'ack',
       'findutils',
+      'coreutils',
+      'keychain',
+      'go',
+      'htop-osx',
+      'jq',
+      'multimarkdown',
+      'nmap',
+      'mercurial',
+      'lynx',
       'gnu-tar'
     ]:
+  }
+
+  $brewcask_packages = [
+    'iterm2',
+    'mou',
+    'chicken'
+  ]
+
+  package { $brewcask_packages:
+    provider => 'brewcask',
   }
 
   file { "${boxen::config::srcdir}/our-boxen":
