@@ -84,6 +84,11 @@ GITHUBTARBALL
     xquartz (1.2.1)
 
 GITHUBTARBALL
+  remote: mloberg/puppet-python
+  specs:
+    python (2.0.1)
+
+GITHUBTARBALL
   remote: phinze/puppet-brewcask
   specs:
     brewcask (0.0.4)
@@ -120,6 +125,7 @@ DEPENDENCIES
   openssl (= 1.0.0)
   phantomjs (= 2.3.0)
   pkgconfig (= 1.0.0)
+  python (= 2.0.1)
   repository (= 2.3.0)
   ruby (= 8.1.4)
   stdlib (= 4.2.1)
