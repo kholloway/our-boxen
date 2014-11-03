@@ -8,3 +8,63 @@
 # heart's content.
 
 python::pyenv_version: "v20141012"
+python::global: "2.7.8"
+python_packages:
+ "markdown for %{hiera('python::global')}":
+  package: "markdown"
+  python: ${python::global}
+ "pssh for %{hiera('python::global')}":
+  package: "pssh"
+  python: ${python::global}
+ "fabric for %{hiera('python::global')}":
+  package: "fabric"
+  python: ${python::global}
+ "mako for %{hiera('python::global')}":
+  package: "mako"
+  python: ${python::global}
+ "bottle for %{hiera('python::global')}":
+  package: "bottle"
+  python: ${python::global}
+ "sqlalchemy for %{hiera('python::global')}":
+  package: "sqlalchemy"
+  python: ${python::global}
+ "ansible for %{hiera('python::global')}":
+  package: "ansible"
+  python: ${python::global}
+ "requests for %{hiera('python::global')}":
+  package: "requests"
+  python: ${python::global}
+ "suds for %{hiera('python::global')}":
+  package: "suds"
+  python: ${python::global}
+ "sqlsoup for %{hiera('python::global')}":
+  package: "sqlsoup"
+  python: ${python::global}
+ "pyzmq for %{hiera('python::global')}":
+  package: "pyzmq"
+  python: ${python::global}
+ "psycopg2 for %{hiera('python::global')}":
+  package: "psycopg2"
+  python: ${python::global}
+ "sphinx for %{hiera('python::global')}":
+  package: "sphinx"
+  python: ${python::global}
+ "awscli for %{hiera('python::global')}":
+  package: "awscli"
+  python: ${python::global}
+ "dnspython for %{hiera('python::global')}":
+  package: "dnspython"
+  python: ${python::global}
+ "luigi for %{hiera('python::global')}":
+  package: "luigi"
+  python: ${python::global}
+ "pytz for %{hiera('python::global')}":
+  package: "pytz"
+  python: ${python::global}
+ "python-ldap for %{hiera('python::global')}":
+  package: "python-ldap"
+  python: ${python::global}
+
+
+
+

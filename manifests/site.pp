@@ -181,96 +181,16 @@ node default {
     version => $python_version,
   }
 
-  python::package { "fabric for ${python_version}":
-    package => 'fabric',
-    python  => $python_version,
-    version => '>=1.9.1',
+  # Required before Ansible will install
+  file { '/usr/share/ansible':
+    ensure => directory,
+    owner  => $boxen_user,
+    group  => staff,
   }
-  python::package { "markdown for ${python_version}":
-    package => 'markdown',
-    python  => $python_version,
-    version => '>=2.4.1',
-  }
-  python::package { "mako for ${python_version}":
-    package => 'mako',
-    python  => $python_version,
-    version => '>=1.0.0',
-  }
-  python::package { "bottle for ${python_version}":
-    package => 'bottle',
-    python  => $python_version,
-    version => '>=0.12.7',
-  }
-  python::package { "SQLAlchemy for ${python_version}":
-    package => 'sqlalchemy',
-    python  => $python_version,
-    version => '>=0.9.7',
-  }
-  python::package { "ansible for ${python_version}":
-    package => 'ansible',
-    python  => $python_version,
-    version => '>=1.7.2',
-  }
-  python::package { "pssh for ${python_version}":
-    package => 'pssh',
-    python  => $python_version,
-    version => '>=2.3.1',
-  }
-  python::package { "requests for ${python_version}":
-    package => 'requests',
-    python  => $python_version,
-    version => '>=1.0.4',
-  }
-  python::package { "suds for ${python_version}":
-    package => 'suds',
-    python  => $python_version,
-    version => '>=0.4',
-  }
-  python::package { "sqlsoup for ${python_version}":
-    package => 'sqlsoup',
-    python  => $python_version,
-    version => '>=0.9.0',
-  }
-  python::package { "pyzmq for ${python_version}":
-    package => 'pyzmq',
-    python  => $python_version,
-    version => '>=14.3.1',
-  }
-  python::package { "psycopg2 for ${python_version}":
-    package => 'psycopg2',
-    python  => $python_version,
-    version => '>=2.5.3',
-  }
-  python::package { "Sphinx for ${python_version}":
-    package => 'sphinx',
-    python  => $python_version,
-    version => '>=1.2.2',
-  }
-  python::package { "awscli for ${python_version}":
-    package => 'awscli',
-    python  => $python_version,
-    version => '>=1.4.2',
-  }
-  python::package { "dnspython for ${python_version}":
-    package => 'dnspython',
-    python  => $python_version,
-    version => '>=1.11.1',
-  }
-  python::package { "luigi for ${python_version}":
-    package => 'luigi',
-    python  => $python_version,
-    version => '>=1.0.16',
-  }
-  python::package { "pytz for ${python_version}":
-    package => 'pytz',
-    python  => $python_version,
-    version => '>=2014.4',
-  }
-  python::package { "python-ldap for ${python_version}":
-    package => 'python-ldap',
-    python  => $python_version,
-    version => '>=2.4.18',
-  }
+
+  # Pull in hieradata to create all our Python packages
+  $python_packages = hiera_hash('python_packages')
+  create_resources('python::package', $python_packages)
 
   # cx-Oracle requires a bunch of crap first, this will break for anyone else
   # Need these values in the shell
