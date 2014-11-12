@@ -91,39 +91,17 @@ node default {
   # See the Puppet-ruby module on Github for more info:
   #  https://github.com/boxen/puppet-ruby
 
-  $ruby_version = '2.1.2'
+  # Pull in global version from Hiera
+  $ruby_version = hiera('ruby::global::version')
   ruby::version { $ruby_version: }
-
-  # This sets our default in rbenv
+  # This sets our default in rbenv and installs it if needed
   class { 'ruby::global':
     version => $ruby_version
   }
 
-  ruby_gem { 'bundler for all rubies':
-    gem          => 'bundler',
-    version      => '~> 1.0',
-    ruby_version => '*',
-  }
-  ruby_gem { "puppet for ${ruby_version}":
-    gem          => 'puppet',
-    version      => '~> 3.4.0',
-    ruby_version => $ruby_version,
-  }
-  ruby_gem { "facter for ${ruby_version}":
-    gem          => 'facter',
-    version      => '~> 1.7.6',
-    ruby_version => $ruby_version,
-  }
-  ruby_gem { "puppet-lint for ${ruby_version}":
-    gem          => 'puppet-lint',
-    version      => '~> 1.0.1',
-    ruby_version => $ruby_version,
-  }
-  ruby_gem { "puppet-syntax for ${ruby_version}":
-    gem          => 'puppet-syntax',
-    version      => '~> 1.3.0',
-    ruby_version => $ruby_version,
-  }
+  # Pull in hieradata to create most of our Ruby packages
+  $ruby_packages = hiera_hash('ruby_packages')
+  create_resources('ruby_gem', $ruby_packages)
 
   # puppet-ruby breaks some gems, this is my silly work around..
   exec { "bundle config charlock_holmes for ${ruby_version}":
@@ -163,18 +141,23 @@ node default {
     ],
   }
 
-  # Oddball setup for Python on 10.9 and 10.10
-  $python_version = '2.7.8'
-  exec { "python ${python_version}":
-    command => "env -i bash -c 'source /opt/boxen/env.sh && CFLAGS=\"-I$(xcrun --show-sdk-path)/usr/include\" pyenv install ${python_version}'",
-    creates => "/opt/boxen/pyenv/versions/${python_version}/bin/python",
+  # Pull the version number of our global python from hiera
+  # Add any other pythons under this
+  $python_version = hiera('python::global')
+
+  # Oddball setup for Python on 10.9 and 10.10 or it won't build
+  case $::macosx_productversion {
+    /^10.{9|10}$/: {
+      exec { "python ${python_version}":
+        command => "env -i bash -c 'source /opt/boxen/env.sh && CFLAGS=\"-I$(xcrun --show-sdk-path)/usr/include\" pyenv install ${python_version}'",
+        creates => "/opt/boxen/pyenv/versions/${python_version}/bin/python",
+      }
+    }
+    default: {}
   }
 
   # Normally this does the actual install but due to a bug the exec above is required
   python::version { $python_version: }
-
-  # Set pyenv_version in Hiera /opt/boxen/repo/hiera/common.yaml like the line below
-  #  python::pyenv_version: "v20141012"
 
   # This sets the version that pyenv uses everywhere to our version
   class { 'python::global':
@@ -196,6 +179,8 @@ node default {
   # Need these values in the shell
   #   LD_LIBRARY_PATH=:/Users/kholloway/lib/oracle/instantclient_11_2
   #   ORACLE_HOME=/Users/kholloway/lib/oracle/instantclient_11_2
+  # Need instantclient basic and instantclient sdk in the directories above
+  #
   python::package { "cx-Oracle for ${python_version}":
     package => 'cx-oracle',
     python  => $python_version,
@@ -211,9 +196,11 @@ node default {
       'libxml2',
       'keychain',
       'boot2docker',
+      'pstree',
       'postgresql',
       'gsasl',
       'curl',
+      'wget',
       'iftop',
       'tree',
       'go',
@@ -238,9 +225,20 @@ node default {
     'chicken'
   ]
 
+  # Install our brewcask packages
   package { $brewcask_packages:
     provider => 'brewcask',
   }
+
+  # Example of how to download and unarchive a zip file
+  #archive { 'service-open-in-safari':
+  #  ensure     => present,
+  #  url        => 'http://www.gingerbeardman.com/services/open-current-safari-page-in-google-chrome.zip',
+  #  target     => "/Users/${luser}/Library/Services/",
+  #  extension  => 'zip',
+  #  checksum   => false,
+  #  src_target => '/tmp',
+  #}
 
   file { "${boxen::config::srcdir}/our-boxen":
     ensure => link,

@@ -61,4 +61,6 @@ github "xquartz",     "1.2.1"
 # https://github.com/boxen.
 github "brewcask",    "0.0.4", :repo => "phinze/puppet-brewcask"
 github "python",      "2.0.1", :repo => "mloberg/puppet-python"
+github 'archive',     '0.3.1', :repo => "camptocamp/puppet-archive"
+
 

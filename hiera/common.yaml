@@ -7,64 +7,87 @@
 # that you can affect 'out of the box', and then customise to your
 # heart's content.
 
+# Ruby settings
+ruby::global::version: '2.1.2'
+# Ruby packages/gems
+ruby_packages:
+ 'bundler for all rubies':
+  gem: 'bundler'
+  version: '~> 1.0'
+  ruby_version: '*'
+ "puppet for %{hiera('ruby::global::version')}":
+  gem: 'puppet'
+  version: '~> 3.4.0'
+  ruby_version: "%{hiera('ruby::global::version')}"
+ "facter for %{hiera('ruby::global::version')}":
+  gem: 'facter'
+  version: '~> 1.7.6'
+  ruby_version: "%{hiera('ruby::global::version')}"
+ "puppet-lint for %{hiera('ruby::global::version')}":
+  gem: 'puppet-lint'
+  ruby_version: "%{hiera('ruby::global::version')}"
+ "puppet-syntax for %{hiera('ruby::global::version')}":
+  gem: 'puppet-syntax'
+  ruby_version: "%{hiera('ruby::global::version')}"
+
+# Python settings
 python::pyenv_version: "v20141012"
 python::global: "2.7.8"
+# Python packages
 python_packages:
  "markdown for %{hiera('python::global')}":
   package: "markdown"
-  python: ${python::global}
+  python: "%{hiera('python::global')}"
  "pssh for %{hiera('python::global')}":
   package: "pssh"
-  python: ${python::global}
+  python: "%{hiera('python::global')}"
  "fabric for %{hiera('python::global')}":
   package: "fabric"
-  python: ${python::global}
+  python: "%{hiera('python::global')}"
  "mako for %{hiera('python::global')}":
   package: "mako"
-  python: ${python::global}
+  python: "%{hiera('python::global')}"
  "bottle for %{hiera('python::global')}":
   package: "bottle"
-  python: ${python::global}
+  python: "%{hiera('python::global')}"
  "sqlalchemy for %{hiera('python::global')}":
   package: "sqlalchemy"
-  python: ${python::global}
+  python: "%{hiera('python::global')}"
  "ansible for %{hiera('python::global')}":
   package: "ansible"
-  python: ${python::global}
+  python: "%{hiera('python::global')}"
  "requests for %{hiera('python::global')}":
   package: "requests"
-  python: ${python::global}
+  python: "%{hiera('python::global')}"
  "suds for %{hiera('python::global')}":
   package: "suds"
-  python: ${python::global}
+  python: "%{hiera('python::global')}"
  "sqlsoup for %{hiera('python::global')}":
   package: "sqlsoup"
-  python: ${python::global}
+  python: "%{hiera('python::global')}"
  "pyzmq for %{hiera('python::global')}":
   package: "pyzmq"
-  python: ${python::global}
+  python: "%{hiera('python::global')}"
  "psycopg2 for %{hiera('python::global')}":
   package: "psycopg2"
-  python: ${python::global}
+  python: "%{hiera('python::global')}"
  "sphinx for %{hiera('python::global')}":
   package: "sphinx"
-  python: ${python::global}
+  python: "%{hiera('python::global')}"
  "awscli for %{hiera('python::global')}":
   package: "awscli"
-  python: ${python::global}
+  python: "%{hiera('python::global')}"
  "dnspython for %{hiera('python::global')}":
   package: "dnspython"
-  python: ${python::global}
+  python: "%{hiera('python::global')}"
  "luigi for %{hiera('python::global')}":
   package: "luigi"
-  python: ${python::global}
+  python: "%{hiera('python::global')}"
  "pytz for %{hiera('python::global')}":
   package: "pytz"
-  python: ${python::global}
+  python: "%{hiera('python::global')}"
  "python-ldap for %{hiera('python::global')}":
   package: "python-ldap"
-  python: ${python::global}
-
-
+  python: "%{hiera('python::global')}"
 
 
