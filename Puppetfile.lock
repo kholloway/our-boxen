@@ -84,6 +84,11 @@ GITHUBTARBALL
     xquartz (1.2.1)
 
 GITHUBTARBALL
+  remote: camptocamp/puppet-archive
+  specs:
+    archive (0.3.1)
+
+GITHUBTARBALL
   remote: mloberg/puppet-python
   specs:
     python (2.0.1)
@@ -109,6 +114,7 @@ GITHUBTARBALL
     module_data (0.0.3)
 
 DEPENDENCIES
+  archive (= 0.3.1)
   boxen (= 3.7.0)
   brewcask (= 0.0.4)
   dnsmasq (= 2.0.0)
