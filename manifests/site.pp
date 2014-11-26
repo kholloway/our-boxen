@@ -110,8 +110,8 @@ node default {
   }
 
   exec { "charlock_holmes for ${ruby_version}":
-    command => "env -i zsh -c 'source /opt/boxen/env.sh && RBENV_VERSION=${ruby_version} gem install charlock_holmes'",
-    unless  => "env -i zsh -c 'source /opt/boxen/env.sh && RBENV_VERSION=${ruby_version} gem list charlock_holmes | grep charlock_holmes'",
+    command => "env -i SHELL=/bin/zsh zsh -c 'source /opt/boxen/env.sh && RBENV_VERSION=${ruby_version} gem install charlock_holmes'",
+    unless  => "env -i SHELL=/bin/zsh zsh -c 'source /opt/boxen/env.sh && RBENV_VERSION=${ruby_version} gem list charlock_holmes | grep charlock_holmes'",
     require => Exec["bundle config charlock_holmes for ${ruby_version}"],
   }
 
@@ -121,8 +121,8 @@ node default {
   }
 
   exec { "nokogiri for ${ruby_version}":
-    command => "env -i zsh -c 'source /opt/boxen/env.sh && RBENV_VERSION=${ruby_version} gem install nokogiri -- --with-iconv-lib=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX${::macosx_productversion_major}.sdk/usr/lib --with-iconv-include=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX${::macosx_productversion_major}.sdk/usr/include'",
-    unless  => "env -i zsh -c 'source /opt/boxen/env.sh && RBENV_VERSION=${ruby_version} gem list nokogiri | grep nokogiri'",
+    command => "env -i SHELL=/bin/zsh zsh -c 'source /opt/boxen/env.sh && RBENV_VERSION=${ruby_version} gem install nokogiri -- --with-iconv-lib=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX${::macosx_productversion_major}.sdk/usr/lib --with-iconv-include=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX${::macosx_productversion_major}.sdk/usr/include'",
+    unless  => "env -i SHELL=/bin/zsh zsh -c 'source /opt/boxen/env.sh && RBENV_VERSION=${ruby_version} gem list nokogiri | grep nokogiri'",
     require => [
       Package['libxml2'],
       Exec["bundle config nokogiri for ${ruby_version}"],
@@ -145,18 +145,7 @@ node default {
   # Add any other pythons under this
   $python_version = hiera('python::global')
 
-  # Oddball setup for Python on 10.9 and 10.10 or it won't build
-  case $::macosx_productversion {
-    /^10.{9|10}$/: {
-      exec { "python ${python_version}":
-        command => "env -i bash -c 'source /opt/boxen/env.sh && CFLAGS=\"-I$(xcrun --show-sdk-path)/usr/include\" pyenv install ${python_version}'",
-        creates => "/opt/boxen/pyenv/versions/${python_version}/bin/python",
-      }
-    }
-    default: {}
-  }
-
-  # Normally this does the actual install but due to a bug the exec above is required
+  # This does the actual install
   python::version { $python_version: }
 
   # This sets the version that pyenv uses everywhere to our version

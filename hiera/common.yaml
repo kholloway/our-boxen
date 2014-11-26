@@ -29,10 +29,14 @@ ruby_packages:
  "puppet-syntax for %{hiera('ruby::global::version')}":
   gem: 'puppet-syntax'
   ruby_version: "%{hiera('ruby::global::version')}"
+ "rspec-puppet for %{hiera('ruby::global::version')}":
+  gem: 'rspec-puppet'
+  ruby_version: "%{hiera('ruby::global::version')}"
 
 # Python settings
 python::pyenv_version: "v20141012"
 python::global: "2.7.8"
+
 # Python packages
 python_packages:
  "markdown for %{hiera('python::global')}":
