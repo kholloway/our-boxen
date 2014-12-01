@@ -89,9 +89,9 @@ GITHUBTARBALL
     archive (0.3.1)
 
 GITHUBTARBALL
-  remote: mloberg/puppet-python
+  remote: kholloway/puppet-python
   specs:
-    python (2.0.1)
+    python (2.0.4)
 
 GITHUBTARBALL
   remote: phinze/puppet-brewcask
@@ -131,7 +131,7 @@ DEPENDENCIES
   openssl (= 1.0.0)
   phantomjs (= 2.3.0)
   pkgconfig (= 1.0.0)
-  python (= 2.0.1)
+  python (= 2.0.4)
   repository (= 2.3.0)
   ruby (= 8.1.4)
   stdlib (= 4.2.1)
