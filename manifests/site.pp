@@ -165,11 +165,8 @@ node default {
     version => $python_version,
   }
 
-  # Install Python 3 for Cortex
+  # Install Python 3
   python::version { '3.4.2': }
-  python::local { "${home}/reops/cortex":
-    version => '3.4.2'
-  }
 
   # Required before Ansible will install
   file { '/usr/share/ansible':
