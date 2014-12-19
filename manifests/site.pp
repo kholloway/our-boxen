@@ -237,7 +237,6 @@ node default {
 
   # Install our brewcask packages
   package { $brewcask_packages:
-    ensure          => latest,
     provider        => 'brewcask',
     install_options => ["--binarydir=${boxen::config::homebrewdir}/bin"],
   }
