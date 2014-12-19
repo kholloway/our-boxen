@@ -76,6 +76,9 @@ node default {
   #ruby::version { '2.1.0': }
   #ruby::version { '2.1.1': }
 
+  # Set home dir for later use
+  $home = "/Users/${::boxen_user}"
+
   # Get the Xcode path to include files
   $include_path = inline_template('<%= %x{xcrun --show-sdk-path}.strip %>')
 
@@ -84,6 +87,15 @@ node default {
   file { '/usr/include':
     ensure => link,
     target => "${include_path}/usr/include",
+  }
+
+  # Create environment setup for Brewcask to fix default installs into /usr/local/bin which no longer exists
+  # NOTE: This env var seems to be ignored during the brewcask installs inside of boxen but fixes
+  #       cask doing the wrong thing when using it via the CLI
+  #       To fix it for boxen installs see the brewcask package definition near the bottom
+  #       where I define the same binarydir install option
+  boxen::env_script { 'homebrewcask':
+    content => "export HOMEBREW_CASK_OPTS=\"--binarydir=${boxen::config::homebrewdir}/bin\"",
   }
 
   # Set our new Ruby version
@@ -217,12 +229,17 @@ node default {
     'mou',
     'qlmarkdown',
     'vagrant',
+    'chefdk',
+    'atom',
+    'filebot',
     'chicken'
   ]
 
   # Install our brewcask packages
   package { $brewcask_packages:
-    provider => 'brewcask',
+    ensure          => latest,
+    provider        => 'brewcask',
+    install_options => ["--binarydir=${boxen::config::homebrewdir}/bin"],
   }
 
   # Example of how to download and unarchive a zip file
