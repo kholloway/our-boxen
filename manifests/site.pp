@@ -199,10 +199,12 @@ node default {
       'coreutils',
       'libxml2',
       'keychain',
+      'ctags',
       'boot2docker',
       'pstree',
       'postgresql',
       'gsasl',
+      'the_silver_searcher',
       'curl',
       'wget',
       'iftop',
@@ -213,6 +215,7 @@ node default {
       'multimarkdown',
       'nmap',
       'mercurial',
+      'tmux',
       'lynx',
       'zsh',
       'gnu-tar'
@@ -229,6 +232,7 @@ node default {
     'chefdk',
     'atom',
     'filebot',
+    'macpass',
     'chicken'
   ]
 
