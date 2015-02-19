@@ -66,9 +66,9 @@ node default {
   #}
 
   # node versions
-  #include nodejs::v0_6
-  #include nodejs::v0_8
-  include nodejs::v0_10
+  #nodejs::version { 'v0.6': }
+  #nodejs::version { 'v0.8': }
+  nodejs::version { 'v0.10': }
 
   # default ruby versions
   #ruby::version { '1.9.3': }
@@ -189,6 +189,20 @@ node default {
     package => 'cx-oracle',
     python  => $python_version,
     version => '>=5.1.3',
+  }
+
+  # Brew tap neovim, do it this way because the tap name is different from the
+  # name that you call it by resulting in Boxen/Puppet tap'ing it each run..
+  exec { 'tap-homebrew-neovim':
+    command => 'brew tap neovim/homebrew-neovim',
+    creates => "${homebrew::config::tapsdir}/neovim/homebrew-neovim",
+  }
+
+  # Now install Neovim
+  package { 'neovim':
+    ensure          => present,
+    install_options => ['--HEAD'],
+    require         => Exec['tap-homebrew-neovim'],
   }
 
   # common, useful packages via Homebrew
