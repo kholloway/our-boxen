@@ -218,6 +218,7 @@ node default {
       'tmux',
       'lynx',
       'zsh',
+      'tig',
       'gnu-tar'
   ]
 
