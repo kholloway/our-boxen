@@ -76,6 +76,15 @@ node default {
   #ruby::version { '2.1.0': }
   #ruby::version { '2.1.1': }
 
+  # common, useful packages
+  package {
+    [
+      'ack',
+      'findutils',
+      'gnu-tar'
+    ]:
+  }
+
   file { "${boxen::config::srcdir}/our-boxen":
     ensure => link,
     target => $boxen::config::repodir

@@ -179,9 +179,7 @@ class people::kholloway {
 
   # common, useful packages via Homebrew
   $brew_packages = [
-      'ack',
       'icu4c',
-      'findutils',
       'coreutils',
       'libxml2',
       'keychain',
@@ -204,8 +202,7 @@ class people::kholloway {
       'tmux',
       'lynx',
       'zsh',
-      'tig',
-      'gnu-tar'
+      'tig'
   ]
 
   # Install the above packages using the default provider which is homebrew
