@@ -10,7 +10,7 @@ class people::kholloway::osx {
   include osx::global::tap_to_click
 
   class { 'osx::global::key_repeat_delay':
-    delay => 5
+    delay => 0
   }
   # Default here is 0, change this to the statement above to set a different value
   include osx::global::key_repeat_rate
