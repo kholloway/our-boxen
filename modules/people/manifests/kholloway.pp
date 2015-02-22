@@ -24,6 +24,9 @@ class people::kholloway {
     content => "export HOMEBREW_CASK_OPTS=\"--binarydir=${boxen::config::homebrewdir}/bin\"",
   }
 
+  # OS X Settings
+  include people::kholloway::osx
+
   # Set our new Ruby version
   # NOTE: You can also specify versions to install as shown a few lines above
   # See the Puppet-ruby module on Github for more info:
