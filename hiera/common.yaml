@@ -93,5 +93,15 @@ python_packages:
  "python-ldap for %{hiera('python::global')}":
   package: "python-ldap"
   python: "%{hiera('python::global')}"
-
-
+ "neovim for %{hiera('python::global')}":
+  package: "neovim"
+  python: "%{hiera('python::global')}"
+ "pymongo for %{hiera('python::global')}":
+  package: "pymongo"
+  python: "%{hiera('python::global')}"
+ "dt for %{hiera('python::global')}":
+  package: "dt"
+  python: "%{hiera('python::global')}"
+ "lxml for %{hiera('python::global')}":
+  package: "lxml"
+  python: "%{hiera('python::global')}"
