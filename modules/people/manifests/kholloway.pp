@@ -220,6 +220,8 @@ class people::kholloway {
     'atom',
     'filebot',
     'macpass',
+    'licecap',
+    'sourcetree',
     'chicken'
   ]
 

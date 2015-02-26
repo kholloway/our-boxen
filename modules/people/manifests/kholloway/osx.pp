@@ -9,11 +9,13 @@ class people::kholloway::osx {
   include osx::global::disable_autocorrect
   include osx::global::tap_to_click
 
+  # Dont set this to zero, it causes keyboard issues on a Retina Macbook
   class { 'osx::global::key_repeat_delay':
-    delay => 0
+    delay => 15
   }
-  # Default here is 0, change this to the statement above to set a different value
-  include osx::global::key_repeat_rate
+  class { 'osx::global::key_repeat_rate':
+    rate => 2
+  }
 
   # Dock
   include osx::dock::autohide
