@@ -240,4 +240,74 @@ class people::kholloway {
   #  checksum   => false,
   #  src_target => '/tmp',
   #}
+
+  # Increase memory limits on OSX NOTE: this requires a reboot..
+  property_list_key { 'maxfiles1':
+    ensure => present,
+    path   => '/Library/LaunchDaemons/limit.maxfiles.plist',
+    key    => 'Label',
+    value  => 'limit.maxfiles',
+  }
+  property_list_key { 'maxfiles2':
+    ensure     => present,
+    path       => '/Library/LaunchDaemons/limit.maxfiles.plist',
+    key        => 'ProgramArguments',
+    value      => ['launchctl','limit','maxfiles','65536','65536'],
+    value_type => 'array',
+    require    => Property_List_Key['maxfiles1'],
+  }
+  property_list_key { 'maxfiles3':
+    ensure     => present,
+    path       => '/Library/LaunchDaemons/limit.maxfiles.plist',
+    key        => 'RunAtLoad',
+    value      => true,
+    value_type => 'boolean',
+    require    => Property_List_Key['maxfiles2'],
+  }
+  property_list_key { 'maxfiles4':
+    ensure     => present,
+    path       => '/Library/LaunchDaemons/limit.maxfiles.plist',
+    key        => 'ServiceIPC',
+    value      => false,
+    value_type => 'boolean',
+    require    => Property_List_Key['maxfiles3'],
+  }
+
+  # Increase MaxProc
+  property_list_key { 'maxproc1':
+    ensure => present,
+    path   => '/Library/LaunchDaemons/limit.maxproc.plist',
+    key    => 'Label',
+    value  => 'limit.maxproc',
+  }
+  property_list_key { 'maxproc2':
+    ensure     => present,
+    path       => '/Library/LaunchDaemons/limit.maxproc.plist',
+    key        => 'ProgramArguments',
+    value      => ['launchctl','limit','maxproc','2048','2048'],
+    value_type => 'array',
+    require    => Property_List_Key['maxproc1'],
+  }
+  property_list_key { 'maxproc3':
+    ensure     => present,
+    path       => '/Library/LaunchDaemons/limit.maxproc.plist',
+    key        => 'RunAtLoad',
+    value      => true,
+    value_type => 'boolean',
+    require    => Property_List_Key['maxproc2'],
+  }
+  property_list_key { 'maxproc4':
+    ensure     => present,
+    path       => '/Library/LaunchDaemons/limit.maxproc.plist',
+    key        => 'ServiceIPC',
+    value      => false,
+    value_type => 'boolean',
+    require    => Property_List_Key['maxproc3'],
+    notify     => Notify['reboot_me'],
+  }
+
+  notify {'reboot_me':
+    name => 'Reboot required for maxproc and maxfiles settings',
+  }
+
 }

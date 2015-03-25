@@ -65,5 +65,6 @@ github "osx",         "2.8.0"
 #github "python",      "2.0.1", :repo => "mloberg/puppet-python"
 github "python",      "2.0.4", :repo => "kholloway/puppet-python"
 github 'archive',     '0.3.6', :repo => "camptocamp/puppet-archive"
+github 'puppet-property_list_key',     '0.2.1', :repo => "glarizza/puppet-property_list_key"
 
 
