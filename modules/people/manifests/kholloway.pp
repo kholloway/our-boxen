@@ -24,6 +24,9 @@ class people::kholloway {
     content => "export HOMEBREW_CASK_OPTS=\"--binarydir=${boxen::config::homebrewdir}/bin\"",
   }
 
+  nodejs::version { 'v0.12.0': }
+  class { 'nodejs::global': version => 'v0.12.0' }
+
   # OS X Settings
   include people::kholloway::osx
 
