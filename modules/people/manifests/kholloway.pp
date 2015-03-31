@@ -219,7 +219,6 @@ class people::kholloway {
     'mou',
     'qlmarkdown',
     'vagrant',
-    'chefdk',
     'atom',
     'filebot',
     'macpass',
