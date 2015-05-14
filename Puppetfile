@@ -62,8 +62,8 @@ github "osx",         "2.8.0"
 # Optional/custom modules. There are tons available at
 # https://github.com/boxen.
 #github "brewcask",    "0.0.5", :repo => "phinze/puppet-brewcask"
-#github "python",      "2.0.1", :repo => "mloberg/puppet-python"
-github "python",      "2.0.4", :repo => "kholloway/puppet-python"
+github "python",      "3.0.0", :repo => "mloberg/puppet-python"
+#github "python",      "2.0.4", :repo => "kholloway/puppet-python"
 github 'archive',     '0.3.6', :repo => "camptocamp/puppet-archive"
 github 'puppet-property_list_key',     '0.2.1', :repo => "glarizza/puppet-property_list_key"
 

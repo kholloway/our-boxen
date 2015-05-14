@@ -201,12 +201,14 @@ class people::kholloway {
       'tree',
       'go',
       'htop-osx',
+      'reattach-to-user-namespace',
       'jq',
       'multimarkdown',
       'nmap',
       'mercurial',
       'tmux',
       'lynx',
+      'bats',
       'zsh',
       'tig'
   ]

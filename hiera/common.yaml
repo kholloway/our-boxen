@@ -34,8 +34,8 @@ ruby_packages:
   ruby_version: "%{hiera('ruby::global::version')}"
 
 # Python settings
-python::pyenv_version: "v20141012"
-python::global: "2.7.8"
+python::pyenv_version: "v20150404"
+python::global: "2.7.9"
 
 # Python packages
 python_packages:
