@@ -117,11 +117,11 @@ class people::kholloway {
   #   ORACLE_HOME=/Users/kholloway/lib/oracle/instantclient_11_2
   # Need instantclient basic and instantclient sdk in the directories above
   #
-  python::package { "cx-Oracle for ${python_version}":
-    package => 'cx-oracle',
-    python  => $python_version,
-    version => '>=5.1.3',
-  }
+  #python::package { "cx-Oracle for ${python_version}":
+  #  package => 'cx-oracle',
+  #  python  => $python_version,
+  #  version => '>=5.1.3',
+  #}
 
   # Brew tap neovim, do it this way because the tap name is different from the
   # name that you call it by resulting in Boxen/Puppet tap'ing it each run..

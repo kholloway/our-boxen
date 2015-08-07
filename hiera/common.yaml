@@ -34,8 +34,9 @@ ruby_packages:
   ruby_version: "%{hiera('ruby::global::version')}"
 
 # Python settings
-python::pyenv_version: "v20150404"
-python::global: "2.7.9"
+#python::pyenv_version: "v20150404"
+python::pyenv::ensure: "v20150719"
+python::global: "2.7.10"
 
 # Python packages
 python_packages:
@@ -105,3 +106,28 @@ python_packages:
  "lxml for %{hiera('python::global')}":
   package: "lxml"
   python: "%{hiera('python::global')}"
+ "python-keystoneclient for %{hiera('python::global')}":
+  package: "python-keystoneclient"
+  python: "%{hiera('python::global')}"
+ "python-novaclient for %{hiera('python::global')}":
+  package: "python-novaclient"
+  python: "%{hiera('python::global')}"
+ "python-heatclient for %{hiera('python::global')}":
+  package: "python-heatclient"
+  python: "%{hiera('python::global')}"
+ "python-swiftclient for %{hiera('python::global')}":
+  package: "python-swiftclient"
+  python: "%{hiera('python::global')}"
+ "python-neutronclient for %{hiera('python::global')}":
+  package: "python-neutronclient"
+  python: "%{hiera('python::global')}"
+ "python-cinderclient for %{hiera('python::global')}":
+  package: "python-cinderclient"
+  python: "%{hiera('python::global')}"
+ "python-glanceclient for %{hiera('python::global')}":
+  package: "python-glanceclient"
+  python: "%{hiera('python::global')}"
+ "python-openstackclient for %{hiera('python::global')}":
+  package: "python-openstackclient"
+  python: "%{hiera('python::global')}"
+
